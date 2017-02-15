@@ -13,7 +13,7 @@ resource "aws_instance" "dns" {
   #count                       = "${length( split( ",", data.terraform_remote_state.vpc_rs.azs ) )}"
   count                       = "${length( split( ",", lookup( var.azs, var.region ) ) )}"
   tags {
-    Name  = "dns-${count.index+1}"
+    Name  = "dns-0${count.index+1}"
     Owner = "${var.owner}"
   }
 }
