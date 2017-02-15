@@ -23,5 +23,5 @@ resource "aws_instance" "dns" {
 # Output
 #
 output "dns_ip" {
-  value = "${aws_instance.dns.0.private_ip}"
+  value = ["${aws_instance.dns.*.private_ip}"]
 }
