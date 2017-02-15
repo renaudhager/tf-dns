@@ -40,6 +40,40 @@ resource "aws_security_group" "dns" {
     cidr_blocks = ["${data.terraform_remote_state.vpc_rs.vpc_cidr_block}"]
   }
 
+  # Allow consul traffic
+  ingress {
+    from_port   = 8500
+    to_port     = 8500
+    protocol    = "tcp"
+    cidr_blocks = ["${data.terraform_remote_state.vpc_rs.vpc_cidr_block}"]
+  }
+
+  ingress {
+    from_port   = 8400
+    to_port     = 8400
+    protocol    = "tcp"
+    cidr_blocks = ["${data.terraform_remote_state.vpc_rs.vpc_cidr_block}"]
+  }
+
+  ingress {
+    from_port   = 8400
+    to_port     = 8400
+    protocol    = "tcp"
+    cidr_blocks = ["${data.terraform_remote_state.vpc_rs.vpc_cidr_block}"]
+  }
+
+  ingress {
+    from_port   = 8300
+    to_port     = 8305
+    protocol    = "tcp"
+    cidr_blocks = ["${data.terraform_remote_state.vpc_rs.vpc_cidr_block}"]
+  }
+
+  tags {
+    Name  = "${var.owner}_consul"
+    owner = "${var.owner}"
+  }
+
   # Allow outgoing traffic
   egress {
     from_port   = 0
