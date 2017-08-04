@@ -32,6 +32,14 @@ resource "aws_security_group" "dns" {
     cidr_blocks = ["${data.terraform_remote_state.vpc_rs.vpc_cidr_block}"]
   }
 
+  # Allow bind update traffic
+  ingress {
+    from_port   = 953
+    to_port     = 953
+    protocol    = "tcp"
+    cidr_blocks = ["${data.terraform_remote_state.vpc_rs.vpc_cidr_block}"]
+  }
+
   # Allow ICMP traffic
   ingress {
     from_port   = -1
