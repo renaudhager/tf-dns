@@ -12,6 +12,9 @@ resource "aws_instance" "dns" {
   # This does not work :-(
   #count                       = "${length( split( ",", data.terraform_remote_state.vpc_rs.azs ) )}"
   count                       = "${length( split( ",", lookup( var.azs, var.region ) ) )}"
+  lifecycle                   = {
+    ignore_changes  = ["ami"]
+  }
   tags {
     Name  = "dns-0${count.index+1}"
     Owner = "${var.owner}"
