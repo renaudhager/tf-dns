@@ -79,7 +79,7 @@ resource "aws_security_group" "dns" {
 
   ingress {
     from_port   = 8200
-    to_port     = 8200
+    to_port     = 8201
     protocol    = "tcp"
     cidr_blocks = ["${data.terraform_remote_state.vpc_rs.vpc_cidr_block}"]
   }
